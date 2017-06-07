@@ -14,4 +14,8 @@ export default defineMessages({
     id: 'boilerplate.components.Header.features',
     defaultMessage: 'Features',
   },
+  blogs: {
+    id: 'boilerplate.components.Header.blogs',
+    defaultMessage: 'Blogs',
+  },
 });
