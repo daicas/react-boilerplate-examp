@@ -7,6 +7,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 
+
 import H1 from 'components/H1';
 import messages from './messages';
 import List from './List';
@@ -14,33 +15,33 @@ import ListItem from './ListItem';
 import ListItemTitle from './ListItemTitle';
 import BlogsList from './BlogsList';
 
+
 export default class BlogsPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
-      item:'item nè',
-      blogs:[{
-        id:1,
-        title:'Title 1',
-        description:'description description description description description description description description ',
-        image:'',
-        date:'6/7/2017'
-      },{
-        id:2,
-        title:'Title 2',
-        description:'description description description description description description description description ',
-        image:'',
-        date:'6/7/2017'
-      }]
+      blogsData:[]
     }
+    this.loadData = this.loadData.bind(this);
   }
-  // Since state and props are static,
-  // there's no need to re-render this component
+  loadData(){
+    const url = require(`!file-loader?name=[hash].[ext]!static/data/blogs.json`);
+    const data = fetch(url)
+            .then( (response) => {
+                return response.json();
+            })
+            .then( (json) => {
+              this.setState({blogsData: json.data});
+        });
+  }
+
   shouldComponentUpdate() {
     return false;
   }
 
+
   render() {
+
     return (
       <div>
         <Helmet
@@ -52,7 +53,7 @@ export default class BlogsPage extends React.Component { // eslint-disable-line 
         <H1>
           <FormattedMessage {...messages.header} />
         </H1>
-         <BlogsList data={this.state.blogs} />
+         <BlogsList data={this.state.blogsData} />
 
       </div>
     );

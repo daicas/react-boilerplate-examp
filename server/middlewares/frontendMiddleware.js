@@ -52,7 +52,6 @@ const addProdMiddlewares = (app, options) => {
   // and other good practices on official Express.js docs http://mxs.is/googmy
   app.use(compression());
   app.use(publicPath, express.static(outputPath));
-
   app.get('*', (req, res) => res.sendFile(path.resolve(outputPath, 'index.html')));
 };
 

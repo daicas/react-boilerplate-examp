@@ -39,18 +39,18 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/features',
-      name: 'features',
-      getComponent(nextState, cb) {
-        import('containers/FeaturePage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
-      },
-    },{
       path: '/blogs',
       name: 'blogs',
       getComponent(nextState, cb) {
         import('containers/BlogsPage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },{
+      path: '/blogs/:number',
+      name: 'blogs',
+      getComponent(nextState, cb) {
+        import('containers/BlogsDetailPage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },
