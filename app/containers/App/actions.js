@@ -68,3 +68,9 @@ export function loadTodos() {
   };
 }
 
+export function todosLoaded(todos) {
+  return {
+    type: 'LOAD_TODOS_SUCCESS',
+    todos
+  };
+}
