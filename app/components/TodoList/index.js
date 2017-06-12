@@ -2,10 +2,11 @@ import React, { PropTypes } from 'react';
 
 import List from 'components/List';
 import ListItem from 'components/ListItem';
-import LoadingIndicator from 'components/LoadingIndicator';
-import RepoListItem from 'containers/RepoListItem';
 
-function ReposList({ loading, error, repos }) {
+import LoadingIndicator from 'components/LoadingIndicator';
+import TodoListItem from 'containers/TodoListItem';
+
+function TodoList({ loading, error, todos }) {
   if (loading) {
     return <List component={LoadingIndicator} />;
   }
@@ -17,17 +18,19 @@ function ReposList({ loading, error, repos }) {
     return <List component={ErrorComponent} />;
   }
 
-  if (repos !== false) {
-    return <ListItem items={repos} component={RepoListItem} />;
+  if (todos !== false) {
+    
+    return (
+        <ListItem item={todos} component={TodoListItem} />);
   }
 
   return null;
 }
 
-ReposList.propTypes = {
+TodoList.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.any,
-  repos: PropTypes.any,
+  todos: PropTypes.any,
 };
 
-export default ReposList;
+export default TodoList;
