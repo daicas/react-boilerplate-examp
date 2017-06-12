@@ -61,3 +61,10 @@ export function repoLoadingError(error) {
     error,
   };
 }
+
+export function loadTodos() {
+  return {
+    type: 'LOAD_TODOS',
+  };
+}
+

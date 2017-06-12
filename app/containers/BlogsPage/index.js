@@ -14,6 +14,12 @@ import List from './List';
 import ListItem from './ListItem';
 import ListItemTitle from './ListItemTitle';
 import BlogsList from './BlogsList';
+import TodoList from './TodoList';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './TodoList/reducers';
+import { getAllTodos } from './TodoList/actions';
+import createSagaMiddleware from 'redux-saga';
 
 
 export default class BlogsPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -24,21 +30,20 @@ export default class BlogsPage extends React.Component { // eslint-disable-line 
     }
     this.loadData = this.loadData.bind(this);
   }
-  loadData(){
-    const url = require(`!file-loader?name=[hash].[ext]!static/data/blogs.json`);
-    const data = fetch(url)
-            .then( (response) => {
-                return response.json();
-            })
-            .then( (json) => {
-              this.setState({blogsData: json.data});
-        });
-  }
+  // loadData(){
+  //   const url = require(`!file-loader?name=[hash].[ext]!static/data/blogs.json`);
+  //   const data = fetch(url)
+  //           .then( (response) => {
+  //               return response.json();
+  //           })
+  //           .then( (json) => {
+  //             this.setState({blogsData: json.data});
+  //       });
+  // }
 
   shouldComponentUpdate() {
     return false;
   }
-
 
   render() {
 
@@ -55,6 +60,7 @@ export default class BlogsPage extends React.Component { // eslint-disable-line 
         </H1>
          <BlogsList data={this.state.blogsData} />
 
+         <TodoListApp {...todosListProps} />
       </div>
     );
   }

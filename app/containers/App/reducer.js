@@ -26,6 +26,7 @@ const initialState = fromJS({
   userData: {
     repositories: false,
   },
+  todos: false,
 });
 
 function appReducer(state = initialState, action) {
@@ -43,6 +44,15 @@ function appReducer(state = initialState, action) {
     case LOAD_REPOS_ERROR:
       return state
         .set('error', action.error)
+        .set('loading', false);
+    case 'LOAD_TODOS':
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .setIn('todo', false);
+    case 'LOAD_TODOS_SUCCESS':
+      return state
+        .setIn('todos', action.todos)
         .set('loading', false);
     default:
       return state;
