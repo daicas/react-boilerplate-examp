@@ -39,22 +39,23 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/blogs',
-      name: 'blogs',
+      path: '/features',
+      name: 'features',
       getComponent(nextState, cb) {
-        import('containers/BlogsPage')
+        import('containers/FeaturePage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },
+    {
+      path: '/article/:id',
+      name: 'article',
+      getComponent(nextState, cb) {
+        import('containers/ArticlesPage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },
     },{
-      path: '/blogs/:number',
-      name: 'blogs',
-      getComponent(nextState, cb) {
-        import('containers/BlogsDetailPage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
-      },
-    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

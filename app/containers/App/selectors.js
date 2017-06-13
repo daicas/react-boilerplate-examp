@@ -26,11 +26,20 @@ const makeSelectRepos = () => createSelector(
   (globalState) => globalState.getIn(['userData', 'repositories'])
 );
 
-const makeSelectTodos = () => createSelector(
+const makeSelectArticles = () => createSelector(
   selectGlobal,
-  (globalState) => globalState.getIn('todos')
+  (globalState) => globalState.getIn(['userData', 'repositories'])
 );
 
+const makeSelectArticlesDetail = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.getIn(['userData', 'repositories'])
+);
+
+const makeSelectArticlesId = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('articlesId')
+);
 
 const makeSelectLocationState = () => {
   let prevRoutingState;
@@ -55,5 +64,6 @@ export {
   makeSelectError,
   makeSelectRepos,
   makeSelectLocationState,
-  makeSelectTodos,
+  makeSelectArticles,
+  makeSelectArticlesDetail
 };
