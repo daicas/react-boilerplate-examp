@@ -10,14 +10,16 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { makeSelectArticles, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
+import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
-import ArticlesList from 'components/ArticlesList';
+import ReposList from 'components/ReposList';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
+import Form from './Form';
+import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { loadArticles } from '../App/actions';
+import { loadRepos } from '../App/actions';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 
@@ -26,15 +28,17 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
    * when initial state username is not null, submit the form to load repos
    */
   componentDidMount() {
-    this.props.loadArticlesList();
+    if (this.props.username && this.props.username.trim().length > 0) {
+      this.props.onSubmitForm();
+    }
   }
 
   render() {
-    const { loading, error, articles } = this.props;
-    const articlesListProps = {
+    const { loading, error, repos } = this.props;
+    const reposListProps = {
       loading,
       error,
-      articles,
+      repos,
     };
 
     return (
@@ -55,8 +59,25 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
             </p>
           </CenteredSection>
           <Section>
-
-            <ArticlesList {...articlesListProps} />
+            <H2>
+              <FormattedMessage {...messages.trymeHeader} />
+            </H2>
+            <Form onSubmit={this.props.onSubmitForm}>
+              <label htmlFor="username">
+                <FormattedMessage {...messages.trymeMessage} />
+                <AtPrefix>
+                  <FormattedMessage {...messages.trymeAtPrefix} />
+                </AtPrefix>
+                <Input
+                  id="username"
+                  type="text"
+                  placeholder="mxstbr"
+                  value={this.props.username}
+                  onChange={this.props.onChangeUsername}
+                />
+              </label>
+            </Form>
+            <ReposList {...reposListProps} />
           </Section>
         </div>
       </article>
@@ -70,27 +91,27 @@ HomePage.propTypes = {
     React.PropTypes.object,
     React.PropTypes.bool,
   ]),
-  articles: React.PropTypes.oneOfType([
+  repos: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.bool,
   ]),
-  loadPage: React.PropTypes.func,
+  onSubmitForm: React.PropTypes.func,
   username: React.PropTypes.string,
   onChangeUsername: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    //onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
-    loadArticlesList: (evt) => {
+    onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
+    onSubmitForm: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadArticles());
-     },
+      dispatch(loadRepos());
+    },
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  articles: makeSelectArticles(),
+  repos: makeSelectRepos(),
   username: makeSelectUsername(),
   loading: makeSelectLoading(),
   error: makeSelectError(),

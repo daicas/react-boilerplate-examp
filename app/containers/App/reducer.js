@@ -16,10 +16,6 @@ import {
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS,
   LOAD_REPOS_ERROR,
-  LOAD_ARTICLES_SUCCESS,
-  LOAD_ARTICLES,
-  LOAD_ARTICLES_ERROR,
-  LOAD_ARTICLES_DETAIL,
 } from './constants';
 
 // The initial state of the App
@@ -45,23 +41,6 @@ function appReducer(state = initialState, action) {
         .set('loading', false)
         .set('currentUser', action.username);
     case LOAD_REPOS_ERROR:
-      return state
-        .set('error', action.error)
-        .set('loading', false);
-    case LOAD_ARTICLES:
-      return state
-        .set('loading', true)
-        .set('error', false)
-        .setIn(['userData', 'repositories'], false);
-    case LOAD_ARTICLES_DETAIL:
-      return state
-        .setIn(['userData', 'repositories'], action.articles, id)
-        .set('loading', false);
-    case LOAD_ARTICLES_SUCCESS:
-      return state
-        .setIn(['userData', 'repositories'], action.articles)
-        .set('loading', false);
-    case LOAD_ARTICLES_ERROR:
       return state
         .set('error', action.error)
         .set('loading', false);
