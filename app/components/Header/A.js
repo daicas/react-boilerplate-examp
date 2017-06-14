@@ -3,7 +3,12 @@ import styled from 'styled-components';
 import NormalA from 'components/A';
 
 const A = styled(NormalA)`
-  padding: 2em 0;
+  ${props => props.logo && css`
+		float: left;
+    position: relative;
+    z-index: 99;
+    margin-bottom: 20px;
+	`}
 `;
 
 export default A;
