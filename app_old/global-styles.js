@@ -1,5 +1,5 @@
 import { injectGlobal } from 'styled-components';
-
+import bgImage from 'static/images/bg-body.png';
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
   html,
@@ -10,6 +10,8 @@ injectGlobal`
 
   body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    font-size: 11px;
   }
 
   body.fontLoaded {
@@ -17,6 +19,7 @@ injectGlobal`
   }
 
   #app {
+
     background-color: #fafafa;
     min-height: 100%;
     min-width: 100%;
