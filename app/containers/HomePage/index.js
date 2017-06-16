@@ -22,64 +22,65 @@ import messages from './messages';
 import { loadRepos } from '../App/actions';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
+import IntroBlock from 'components/IntroBlock';
+import HomeNewsBlock from 'components/HomeNewsBlock';
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  /**
-   * when initial state username is not null, submit the form to load repos
-   */
+
   componentDidMount() {
     if (this.props.username && this.props.username.trim().length > 0) {
       this.props.onSubmitForm();
     }
   }
 
-  render() {
-    const { loading, error, repos } = this.props;
-    const reposListProps = {
-      loading,
-      error,
-      repos,
-    };
+  render(props) {
 
     return (
-      <article>
-
-      </article>
+      <main>
+        <IntroBlock />
+        <HomeFeatured>
+          <HomeNewsBlock />
+          <article class="partners-block block">
+            <header>
+              <h2 class="title">Partners</h2>
+            </header>
+            <section>
+              <div class="partners-slider">
+                <div class="partners-slider-item"><a href="#" title="logo 1"><img src="images/upload/logo-1.jpg" alt="logo 1"/></a><a href="#" title="logo 2"><img src="images/upload/logo-2.jpg" alt="logo 2"/></a>
+                </div>
+                <div class="partners-slider-item"><a href="#" title="logo 1"><img src="images/upload/logo-3.jpg" alt="logo 1"/></a><a href="#" title="logo 2"><img src="images/upload/logo-4.jpg" alt="logo 2"/></a>
+                </div>
+                <div class="partners-slider-item"><a href="#" title="logo 1"><img src="images/upload/logo-5.jpg" alt="logo 1"/></a><a href="#" title="logo 2"><img src="images/upload/logo-6.jpg" alt="logo 2"/></a>
+                </div>
+                <div class="partners-slider-item"><a href="#" title="logo 1"><img src="images/upload/logo-1.jpg" alt="logo 1"/></a><a href="#" title="logo 2"><img src="images/upload/logo-2.jpg" alt="logo 2"/></a>
+                </div>
+                <div class="partners-slider-item"><a href="#" title="logo 1"><img src="images/upload/logo-3.jpg" alt="logo 1"/></a><a href="#" title="logo 2"><img src="images/upload/logo-4.jpg" alt="logo 2"/></a>
+                </div>
+                <div class="partners-slider-item"><a href="#" title="logo 1"><img src="images/upload/logo-5.jpg" alt="logo 1"/></a><a href="#" title="logo 2"><img src="images/upload/logo-6.jpg" alt="logo 2"/></a>
+                </div>
+              </div>
+            </section>
+          </article>
+        </HomeFeatured>
+      </main>
     );
   }
 }
 
 HomePage.propTypes = {
-  loading: React.PropTypes.bool,
-  error: React.PropTypes.oneOfType([
-    React.PropTypes.object,
-    React.PropTypes.bool,
-  ]),
-  repos: React.PropTypes.oneOfType([
-    React.PropTypes.array,
-    React.PropTypes.bool,
-  ]),
-  onSubmitForm: React.PropTypes.func,
-  username: React.PropTypes.string,
-  onChangeUsername: React.PropTypes.func,
+
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
-    onSubmitForm: (evt) => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
-    },
+
+
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  repos: makeSelectRepos(),
-  username: makeSelectUsername(),
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
+
 });
 
 // Wrap the component to inject dispatch and state into it
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default HomePage;

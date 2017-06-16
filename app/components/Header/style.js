@@ -7,7 +7,8 @@ import iconSearch from 'static/images/icon-search.png';
 import iconVN from 'static/images/vn.png';
 import iconEN from 'static/images/EN.png';
 import iconRU from 'static/images/ru.png';
-
+import navBarLine from 'static/images/line.png';
+import { Link } from 'react-router';
 
 const HeaderTab = styled.header`
 	overflow: hidden;
@@ -21,7 +22,7 @@ const A = styled.a`
   margin-bottom: 20px;
 `;
 
-const LinkLogo = styled.a`
+const LinkLogo = styled(Link)`
 	float: left;
   position: relative;
   z-index: 99;
@@ -105,6 +106,47 @@ const LinkLang = styled.a`
   height: 16px;
 	background: url(${props => props.VN? iconVN : props.EN? iconEN : iconRU});
 `;
+const NavBar = styled.nav`
+	overflow: hidden;
+	background: #ff8a00;
+	background: linear-gradient(#ffcc00, #ff8a00);
+	border: 1px solid #ff8a00;
+	border-radius: 5px;
+	-ms-border-radius: 5px;
+	width: 100%;
+`;
+const NavBarList = styled.ul`
+	width: 100%;
+  height: 40px;
+  display: table;
+	list-style:none;
+	margin:0;
+	padding:0;
+`;
+const NavBarListItem = styled.li`
+	display: table-cell;
+  width: 16.66666667%;
+  background: url(${props => props.first ? 'none' : navBarLine }) 0 center no-repeat;
+`;
+const NavBarLink = styled(Link)`
+	display: block;
+  line-height: 40px;
+  text-align: center;
+  font-family: "CenturyGothic", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-shadow: 0 -2px #ff8a00;
+	&:hover {
+		background: #ff9e00;
+    color: #fff;
+	}
+	&:active {
+		background: #ff9e00;
+	}
+`;
 
 export {
 
@@ -121,5 +163,8 @@ export {
 	ListLanguage,
 	ListLanguageItem,
 	LinkLang,
-
+	NavBar,
+	NavBarList,
+	NavBarListItem,
+	NavBarLink
 };

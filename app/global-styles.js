@@ -1,8 +1,14 @@
 import { injectGlobal } from 'styled-components';
 import bgImage from 'static/images/bg-body.png';
-
+import fontwoff2 from 'static/fonts/gothic.woff';
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
+
+@font-face {
+  font-family: 'CenturyGothic';
+  src: url(${require('static/fonts/gothic.woff')}) format('woff'), url(${require('static/fonts/gothic.ttf')}) format('truetype');
+}
+
   html,
   body {
     height: 100%;
@@ -10,12 +16,12 @@ injectGlobal`
   }
 
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 
   }
 
   body.fontLoaded {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   #app {
@@ -49,10 +55,5 @@ injectGlobal`
   a:hover {
     color: #ff9e00;
   }
-  a:active {
-    color: #0078cc;
-  }
-  a:focus {
-    outline: 0;
-  }
+
 `;

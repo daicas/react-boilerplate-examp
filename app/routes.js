@@ -38,9 +38,49 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
+    },{
+      path: '/about',
+      name: 'about us',
+      getComponent(nextState, cb) {
+        import('containers/FeaturePage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
     }, {
-      path: '/features',
-      name: 'features',
+      path: '/services',
+      name: 'services',
+      getComponent(nextState, cb) {
+        import('containers/FeaturePage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },{
+      path: '/news-event',
+      name: 'news & event',
+      getComponent(nextState, cb) {
+        import('containers/FeaturePage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    }, {
+      path: '/gallery',
+      name: 'gallery',
+      getComponent(nextState, cb) {
+        import('containers/FeaturePage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },{
+      path: '/contact-us',
+      name: 'contact us',
+      getComponent(nextState, cb) {
+        import('containers/FeaturePage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    },{
+      path: '/faqs',
+      name: 'faqs',
       getComponent(nextState, cb) {
         import('containers/FeaturePage')
           .then(loadModule(cb))

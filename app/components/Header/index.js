@@ -2,7 +2,6 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Img from './Img';
-import NavBar from './NavBar';
 import HeaderLink from './HeaderLink';
 import Logo from 'static/images/logo.png';
 import messages from './messages';
@@ -20,6 +19,10 @@ import {
   ListLanguage,
 	ListLanguageItem,
 	LinkLang,
+  NavBar,
+	NavBarList,
+	NavBarListItem,
+	NavBarLink
 
   } from './style';
 
@@ -29,7 +32,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
   render(props) {
     return (
       <HeaderTab className="main-header">
-        <LinkLogo href="#" title="Template Demo" ><Img src={Logo} alt="Sutrix template demo" /></LinkLogo>
+        <LinkLogo to="/" title="Template Demo" ><Img src={Logo} alt="Sutrix template demo" /></LinkLogo>
         <NavBnt>
           <IconBar />
           <IconBar />
@@ -51,40 +54,26 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
               </ListLanguageItem>
             </ListLanguage>
           </NavRight>
-          <nav className="navbar">
-            <ul>
-              <li className="active"><a href="#" title="About us">About us</a>
-              </li>
-              <li><a href="#" title="Services">Services</a>
-              </li>
-              <li><a href="#" title="New &amp; event">New & event</a>
-              </li>
-              <li><a href="#" title="Gallery">Gallery</a>
-              </li>
-              <li><a href="#" title="Contact us">Contact us</a>
-              </li>
-              <li><a href="#" title="FAQs">FAQs</a>
-              </li>
-            </ul>
-          </nav>
+          <NavBar>
+            <NavBarList>
+              <NavBarListItem first className="active"><NavBarLink to="/about" title="About us">About us</NavBarLink>
+              </NavBarListItem>
+               <NavBarListItem ><NavBarLink to="/services" title="Services">Services</NavBarLink>
+              </NavBarListItem>
+              <NavBarListItem ><NavBarLink to="/news-event" title="New & event">New & event</NavBarLink>
+              </NavBarListItem>
+              <NavBarListItem ><NavBarLink to="/gallery" title="Gallery">Gallery</NavBarLink>
+              </NavBarListItem>
+              <NavBarListItem ><NavBarLink to="/contact-us" title="Contact us">Contact us</NavBarLink>
+              </NavBarListItem>
+              <NavBarListItem ><NavBarLink to="/faqs" title="FAQs">FAQs</NavBarLink>
+              </NavBarListItem>
+            </NavBarList>
+          </NavBar>
         </NavbarWrapper>
       </HeaderTab>
     );
-    // return (
-    //   <div>
-    //     <A href="https://twitter.com/mxstbr">
-    //       <Img src={Banner} alt="react-boilerplate - Logo" />
-    //     </A>
-    //     <NavBar>
-    //       <HeaderLink to="/">
-    //         <FormattedMessage {...messages.home} />
-    //       </HeaderLink>
-    //       <HeaderLink to="/features">
-    //         <FormattedMessage {...messages.features} />
-    //       </HeaderLink>
-    //     </NavBar>
-    //   </div>
-    // );
+
   }
 }
 
